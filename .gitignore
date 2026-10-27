@@ -1,0 +1,7 @@
+# OS / editor cruft
+.DS_Store
+*.swp
+.vscode/
+
+# Local dev server log (not needed in the repo)
+*.log

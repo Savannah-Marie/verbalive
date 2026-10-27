@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Verbalive">
+  <!-- PLACEHOLDER favicon — trefoil of rings (blue/black/gold). Not the official WNC crest. -->
+  <rect width="120" height="120" rx="24" fill="#ffffff"/>
+  <g fill="none" stroke-width="10">
+    <circle cx="60" cy="44" r="23" stroke="#1d70b8"/>
+    <circle cx="44" cy="74" r="23" stroke="#111111"/>
+    <circle cx="76" cy="74" r="23" stroke="#D4A017"/>
+  </g>
+</svg>

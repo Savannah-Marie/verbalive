@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 120" role="img" aria-label="Council">
+  <!-- PLACEHOLDER logo — original artwork: a trefoil of interlocking rings recoloured
+       blue/black/gold. Inspired by, but NOT, the official WNC crest. Swap for the real
+       logo only once brand/comms have signed it off. -->
+  <g fill="none" stroke-width="9">
+    <circle cx="58" cy="42" r="24" stroke="#1d70b8"/>
+    <circle cx="42" cy="72" r="24" stroke="#111111"/>
+    <circle cx="74" cy="72" r="24" stroke="#D4A017"/>
+  </g>
+  <text x="132" y="75" font-family="Asap, Arial, sans-serif" font-size="42" font-weight="700" fill="#111111">Council</text>
+</svg>
