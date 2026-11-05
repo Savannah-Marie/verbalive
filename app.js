@@ -70,6 +70,7 @@
   const elStatus = $("#status");
   const elStatusText = $("#status-text");
   const elStatusInterim = $("#status-interim");
+  const elDoneBtn = $("#done-btn");
   const elConversation = $("#conversation");
   const elEmpty = $("#empty-state");
   const elAutospeak = $("#autospeak");
@@ -153,17 +154,22 @@
     const r = new SR();
     r.interimResults = true;
     r.maxAlternatives = 1;
-    r.continuous = false;
+    // Continuous: keep capturing until the user presses "Done", rather than the
+    // engine guessing when a sentence has ended — which misfires in noisy rooms.
+    r.continuous = true;
 
     r.onresult = function (event) {
+      // Rebuild from all results each time so continuous mode accumulates the
+      // whole utterance (not just the latest chunk).
       let interim = "", finalText = "";
-      for (let i = event.resultIndex; i < event.results.length; i++) {
+      for (let i = 0; i < event.results.length; i++) {
         const res = event.results[i];
-        if (res.isFinal) finalText += res[0].transcript;
+        if (res.isFinal) finalText += res[0].transcript + " ";
         else interim += res[0].transcript;
       }
-      if (interim) setStatus("listening", "Listening…", interim);
-      if (finalText) r._final = finalText.trim();
+      r._final = finalText.trim();
+      const live = (finalText + interim).trim();
+      setStatus("listening", "Listening… press ✓ Done when you've finished.", live);
     };
 
     r.onerror = function (event) {
@@ -221,7 +227,8 @@
     }
     listening = true;
     setListeningUI(sourceLang);
-    setStatus("listening", "Listening in " + LANGS[sourceLang].name + "…", "");
+    elDoneBtn.hidden = false;
+    setStatus("listening", "Listening in " + LANGS[sourceLang].name + "… speak, then press ✓ Done.", "");
   }
 
   function stopListening() {
@@ -238,6 +245,7 @@
 
   function stopListeningUI() {
     listening = false;
+    elDoneBtn.hidden = true;
     btnA.classList.remove("is-listening");
     btnB.classList.remove("is-listening");
   }
@@ -508,6 +516,7 @@
     } else {
       btnA.addEventListener("click", onTalkClick);
       btnB.addEventListener("click", onTalkClick);
+      elDoneBtn.addEventListener("click", stopListening);
     }
 
     elLangLeft.addEventListener("change", function () { onLangChange("left", elLangLeft.value); });
